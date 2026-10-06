@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import '../css/form.css';
 
-const Formulario = ({ Visible, setVisible }) => {
+const Formulario = ({ Visible, setVisible,pacientes,setPacientes }) => {
 
   const [paciente, setPaciente] = useState('')
   const [propietario, setPropietario] = useState('')
@@ -12,6 +12,24 @@ const Formulario = ({ Visible, setVisible }) => {
 
   const handleCita = (e)=>{
     e.preventDefault()
+    //validations
+    if ([paciente.trim(),propietario.trim(),email.trim(),telefono.trim(), fechaAlta.trim(), sintomas.trim()].includes('')){
+      window.alert('Error: todos los campos son obligatorios' )
+      return;
+    }
+    //create an object with all values in the form
+    const nuevoPaciente = {
+      paciente,
+      propietario,
+      email,
+      telefono,
+      fechaAlta,
+      sintomas
+    };
+    nuevoPaciente.id = Date.now();
+
+    console.log(nuevoPaciente)
+    setPacientes([...pacientes, nuevoPaciente])
   }
 
   return (
@@ -64,7 +82,7 @@ const Formulario = ({ Visible, setVisible }) => {
       </form>
 
       <div className="contenedor_btn">
-        <button className="form-btn-submit" type="submit">
+        <button className="form-btn-submit" type='submit'>
           <span className="form-btn-submit-texto">Senden</span>
         </button>
         <button className="form-btn-cancelar" onClick={() => setVisible(false)}>
@@ -76,4 +94,4 @@ const Formulario = ({ Visible, setVisible }) => {
   )
 }
 
-export default Formulario
+export default Formulario;
