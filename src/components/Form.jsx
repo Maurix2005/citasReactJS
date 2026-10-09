@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import '../css/form.css';
 
-const Formulario = ({ Visible, setVisible,pacientes,setPacientes }) => {
+const Formulario = ({ setVisible,pacientes,setPacientes }) => {
 
   const [paciente, setPaciente] = useState('')
   const [propietario, setPropietario] = useState('')
@@ -30,6 +30,7 @@ const Formulario = ({ Visible, setVisible,pacientes,setPacientes }) => {
 
     console.log(nuevoPaciente)
     setPacientes([...pacientes, nuevoPaciente])
+    setVisible(false)
   }
 
   return (
@@ -79,18 +80,16 @@ const Formulario = ({ Visible, setVisible,pacientes,setPacientes }) => {
             rows={7}
             onChange={(e) => setSintomas(e.target.value)} />
         </div>
+        <div className="contenedor_btn">
+          <button className="form-btn-submit" type='submit'>
+            <span className="form-btn-submit-texto">Senden</span>
+          </button>
+          <button className="form-btn-cancelar" onClick={() => setVisible(false)}>
+            <span className="form-btn-cancelar-texto">Cancel</span>
+          </button>
+        </div>
       </form>
-
-      <div className="contenedor_btn">
-        <button className="form-btn-submit" type='submit'>
-          <span className="form-btn-submit-texto">Senden</span>
-        </button>
-        <button className="form-btn-cancelar" onClick={() => setVisible(false)}>
-          <span className="form-btn-cancelar-texto">Cancel</span>
-        </button>
-      </div>
     </div>
-
   )
 }
 
