@@ -1,12 +1,15 @@
 import '../css/paciente.css';
 
-const Paciente = ({setVisible,pacientes,paciente}) =>{
+const Paciente = ({setVisible,pacientes,paciente,eliminar}) =>{
 
 
     const handleEditar = ()=>{
         setVisible(true);
         
         console.log(pacientes);
+    }
+    const handleEliminar = ()=>{
+        eliminar(paciente.id);
     }
     return(
         <article className="paciente-card">
@@ -19,7 +22,7 @@ const Paciente = ({setVisible,pacientes,paciente}) =>{
                 <button className="paciente-btn paciente-btn-edit" onClick={() => handleEditar()}>
                     Editar
                 </button>
-                <button className="paciente-btn paciente-btn-eliminate">
+                <button className="paciente-btn paciente-btn-eliminate" onClick={()=>handleEliminar()}> {/* una practica de manejo de eventos; handle se esta utilizando en el DOM */}
                     Eliminar
                 </button>
             </div>

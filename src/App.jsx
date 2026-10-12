@@ -8,6 +8,14 @@ function App() {
   const [modalVisible, setModalVisible] = useState(false);
   const [pacientes, setPacientes] = useState([])
 
+  const eliminarPaciente = (id)=>{
+    const confirmacion = window.confirm('Es neta que quieres eliminar esta cita??? si lo eliminas ya mamaste')
+    if (confirmacion) {
+      const pacienteActualizado = pacientes.filter( paciente => paciente.id !== id)
+      setPacientes(pacienteActualizado)
+    }
+  }
+
   return (
     <>
       <main className="container">
@@ -21,7 +29,8 @@ function App() {
           key={paciente.id}
           paciente={paciente}
           setVisible = {setModalVisible} 
-          pacientes = {pacientes}/>
+          pacientes = {pacientes}
+          eliminar = {eliminarPaciente}/>
         ))}
         
         {modalVisible && (
